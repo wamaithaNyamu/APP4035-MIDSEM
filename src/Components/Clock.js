@@ -1,15 +1,13 @@
 import {useEffect, useState} from "react";
-
+import ClockComponent from "./ClockComponent";
 
 
 export const  Clock = () => {
-    const [staticTime, setStaticTime] = useState(new Date().toUTCString())
-    const [interactiveTime, setInteractiveTime] = useState( new Date().toUTCString())
 
     const cities = [
         {
-        city:'Nairobi',
-        static: true,
+            city:'Nairobi',
+            static: true,
             image:"https://i.ytimg.com/vi/Cgb6bOJ1DLY/maxresdefault.jpg"
 
         },
@@ -35,38 +33,11 @@ export const  Clock = () => {
 
     ]
 
-        useEffect(()=>{
-            setInterval(() => setInteractiveTime(new Date().toUTCString()) , 1000)
-
-        },[interactiveTime])
-
     return (
         <div >
                 <ul class="cards">
-                    {cities.map((x) => (
-                        <li>
-                        <a href="" className="card">
-                            <img src={x.image} className="card__image" alt=""/>
-                            <div className="card__overlay">
-                                <div className="card__header">
-                                    <svg className="card__arc" xmlns="http://www.w3.org/2000/svg">
-                                        <path/>
-                                    </svg>
-                                    <img className="card__thumb" src={x.image} alt=""/>
-                                    <div className="card__header-text">
-                                        <h3 className="card__title">{x.city.toUpperCase()}</h3>
-                                        <span className="card__status">{x.static ?
-                                            <span style={{color:"red"}}>{staticTime}</span>
-                                            :
-                                            <span style={{color:"green"}}> {interactiveTime}</span> }
-
-                                        </span>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </a>
-                    </li>
+                    {cities.map((city) => (
+                        <ClockComponent city={city}/>
                     ))
                     }
 
